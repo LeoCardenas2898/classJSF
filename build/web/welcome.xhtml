@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Menu</title>
+        <link href="#{request.contextPath}/css/styles.css" rel="stylesheet" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <p:outputLabel value=" Welcome user:  #{controladorUsuario.emp.nombre} #{controladorUsuario.emp.paterno}    #{controladorUsuario.emp.materno}" />
+        <br /><br />
+        <p:tabView>
+            <p:tab title="Lista de empleados" >
+                <p:dataTable value="#{controladorEmpleado.listEmpleado}" var="emp" id="datos"  style="font-size: 12px;">
+                <p:column headerText="Code" width="50" >
+                    <p:outputLabel value="#{emp.idempleado}"/>
+                </p:column>
+                <p:column headerText="Name" width="100">
+                    <p:outputLabel value="#{emp.nombre}"/>
+                </p:column>
+                <p:column headerText="Paterno" width="150">
+                    <p:outputLabel value="#{emp.paterno}"/>
+                </p:column>
+                <p:column headerText="Materno" width="100">
+                    <p:outputLabel value=" #{emp.materno}"/>
+                </p:column>
+                <p:column headerText="Cargo" width="100">
+                    <p:outputLabel value=" #{emp.cargo}"/>
+                </p:column>
+                </p:dataTable>
+                <br />
+                <p:commandButton value="Actualizar" actionListener="${controladorEmpleado.listar()}" update="datos" />                
+            </p:tab>
+
+            <p:tab title="Ingresar nuevo empleado">
+                <h:form id="form">
+                    <h:panelGrid columns="2" >
+                        <p:outputLabel value="Nombre"  />
+                        <p:inputText value="${controladorEmpleado.emp.nombre}"  />
+                        <p:outputLabel value="Apellido Paterno" />
+                        <p:inputText  value="${controladorEmpleado.emp.paterno}"/>
+                        <p:outputLabel value="Apellido Materno" />
+                        <p:inputText  value="${controladorEmpleado.emp.materno}"/>
+                        <p:outputLabel value="Cargo" />
+                        <p:inputText  value="${controladorEmpleado.emp.cargo}"/>
+                        <p:commandButton value="Agregar" actionListener="${controladorEmpleado.agregar()}" update="mensaje" />
+                    </h:panelGrid>
+                    <p:outputLabel id="mensaje" value="${controladorEmpleado.resultado}" style="text-align:center; display: block;"/>
+                </h:form>
+                <br />
+            </p:tab>
+            
+        <p:tab title="Modificar empleado por código">
+            <h:form>
+            <h:panelGrid columns="2">
+                    <p:outputLabel value="Codigo"/>
+                    <p:inputText value="${controladorEmpleado.emp.idempleado}"/>
+                    <p:outputLabel value="Nombre"/>
+                    <p:inputText value="${controladorEmpleado.emp.nombre}" />
+                    <p:outputLabel value="Apellido Paterno"/>
+                    <p:inputText value="${controladorEmpleado.emp.paterno}"/>
+                    <p:outputLabel value="Apellido Materno"/>
+                    <p:inputText value="${controladorEmpleado.emp.materno}"/>
+                    <p:outputLabel value="Cargo"/>
+                    <p:inputText value="${controladorEmpleado.emp.cargo}"/>
+                <p:commandButton value="Modificar empleado" actionListener="${controladorEmpleado.modificar()}" update="error"/>
+                </h:panelGrid>
+                <br />
+                <p:outputLabel id="error" value="${controladorEmpleado.resultado}" style="text-align:center; display: block;"/>
+            </h:form>
+        </p:tab>
+            
+        <p:tab title="Eliminar empleado">
+            <h:form>
+            <h:panelGrid columns="2">
+                        <p:outputLabel value="Ingrese el código del empleado a eliminar: " />
+                        <p:inputText value="${controladorEmpleado.emp.idempleado}" />
+                        <p:commandButton value="Eliminar" actionListener="${controladorEmpleado.eliminar()}" update="resultado" />
+            </h:panelGrid>
+            <p:outputLabel id="resultado" value="${controladorEmpleado.resultado}" style="text-align:center; display: block;"/>
+        </h:form>
+        </p:tab>    
+            
+        </p:tabView>
+    </h:body>
+</html>

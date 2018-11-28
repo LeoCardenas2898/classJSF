@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Login</title>
+        <link href="#{request.contextPath}/css/styles.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <h2 align="center" >Welcome to Store</h2>
+        <h:form class="form1">
+            <div id="user">
+                <img src="#{request.contextPath}/img/user.png" width="30px" style="margin: 5px;"/>
+                <br />
+                <p:inputText  value="#{controladorUsuario.usuario}" placeholder="User" style="margin: 10px; border: none; width: 70%; text-align: center;" />
+            </div>
+            <br />
+            <div id="pass">
+                <img src="#{request.contextPath}/img/password.png" width="30px" style="margin: 5px;"/>
+                <br />
+                <p:password  value="#{controladorUsuario.password}" placeholder="Password" style="margin: 10px; border: none; width: 70%; text-align: center;" />
+            </div>
+            <br />
+            <p:commandButton id="button" value="Sign in" action="#{controladorUsuario.login()}" update="mensaje" />
+            <br />
+            <br />
+        </h:form>
+        <p:outputLabel id="mensaje" value="#{controladorUsuario.message}" style="text-align:center; display: block;"></p:outputLabel>
+    </h:body>
+    <script>
+        alert("Importar la base de datos incluida en la carpeta!");
+    </script>
+        
+    </html>
+
